@@ -1,0 +1,7 @@
+C:\Users\Alexander\Desktop\Программа того чувака\Хуйня\EnglishLearning 2\EnglishLearning.Api\obj\Debug\net6.0\EnglishLearning.Api.csproj.AssemblyReference.cache
+C:\Users\Alexander\Desktop\Программа того чувака\Хуйня\EnglishLearning 2\EnglishLearning.Api\obj\Debug\net6.0\EnglishLearning.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alexander\Desktop\Программа того чувака\Хуйня\EnglishLearning 2\EnglishLearning.Api\obj\Debug\net6.0\EnglishLearning.Api.AssemblyInfoInputs.cache
+C:\Users\Alexander\Desktop\Программа того чувака\Хуйня\EnglishLearning 2\EnglishLearning.Api\obj\Debug\net6.0\EnglishLearning.Api.AssemblyInfo.cs
+C:\Users\Alexander\Desktop\Программа того чувака\Хуйня\EnglishLearning 2\EnglishLearning.Api\obj\Debug\net6.0\EnglishLearning.Api.csproj.CoreCompileInputs.cache
+C:\Users\Alexander\Desktop\Программа того чувака\Хуйня\EnglishLearning 2\EnglishLearning.Api\obj\Debug\net6.0\EnglishLearning.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Alexander\Desktop\Программа того чувака\Хуйня\EnglishLearning 2\EnglishLearning.Api\obj\Debug\net6.0\EnglishLearning.Api.MvcApplicationPartsAssemblyInfo.cache
