@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Магазин по продаже наушников</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="
+          .Web.styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div id="app">Загрузка...</div>
+
+    <div id="blazor-error-ui">
+        Произошла необработанная ошибка.
+        <a href="" class="reload">Перезагрузить</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+    <script>
+        function initPayPalButton() {
+            var description = document.querySelector('#smart-button-container #description');
+            var amount = document.querySelector('#smart-button-container #amount');
+
+            var purchase_units = [];
+            purchase_units[0] = {};
+            purchase_units[0].amount = {};
+
+            paypal.Buttons({
+                style: {
+                    color: 'gold',
+                    shape: 'rect',
+                    label: 'paypal',
+                    layout: 'vertical',
+                },
+
+                createResourceProfile: function (data, actions) {
+                    purchase_units[0].description = description.value;
+                    purchase_units[0].amount.value = amount.value;
+
+                    return actions.ResourceProfile.create({
+                        purchase_units: purchase_units,
+                    });
+                },
+
+                onApprove: function (data, actions) {
+                    return actions.ResourceProfile.capture().then(function (ResourceProfileData) {
+                        //Полная доступная информация
+                        console.log('Capture result', ResourceProfileData, JSON.stringify(ResourceProfileData, null, 2));
+
+                        //Показать сообщение об успехе на этой странице, например.
+                        const element = document.getElementById('paypal-button-container');
+                        element.innerHTML = '';
+                        element.innerHTML = '<h3>Спасибо за ваш платеж!</h3>';
+                        // Or go to another URL:  actions.redirect('thank_you.html');
+                    });
+                },
+
+                onError: function (err) {
+                    console.log(err);
+                }
+            }).render('#paypal-button-container');
+        }
+    </script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="js/pingCartFunctions.js"></script>
+    <script src="js-interopt.js"></script>
+</body>
+
+</html>

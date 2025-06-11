@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\DisplayResources.razor.css" />
+    <None Remove="Pages\DisplaySpinner.razor.css" />
+    <None Remove="Pages\ResourceProfile.razor.css" />
+    <None Remove="Shared\UserProfileActivitiessNavMenu.razor.css" />
+  </ItemGroup>
+
+<ItemGroup>
+    <Content Include="Pages\DisplayResources.razor.css" />
+    <Content Include="Pages\DisplaySpinner.razor.css" />
+    <Content Include="Pages\UserProfileActivitie.razor.css" />
+    <Content Include="Shared\TopicsNavMenu.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EnglishLearning.Models\EnglishLearning.Models.csproj" />
+  </ItemGroup>
+
+</Project>

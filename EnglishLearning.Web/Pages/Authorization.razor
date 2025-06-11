@@ -1,0 +1,12 @@
+﻿@page "/Authorization"
+
+<!--Авторизация-->
+<h1 class="mb-5">Авторизация</h1>
+<AuthorizeView>
+    <Authorized>
+        Добро пожаловать
+    </Authorized>
+    <NotAuthorized>
+        Не получилось авторизироваться. Перейдите на <a href="/login">Войти</a>
+    </NotAuthorized>
+</AuthorizeView>

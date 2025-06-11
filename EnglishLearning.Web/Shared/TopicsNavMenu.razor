@@ -1,0 +1,24 @@
+﻿@inherits TopicsNavMenuBase
+
+<!--Кусок меню который по производителям наушников-->
+@if(TopicsDtos == null && ErrorMessage == null)
+{
+    <DisplaySpinner/>
+}
+else if(ErrorMessage != null)
+{
+    <DisplayError ErrorMessage = "@ErrorMessage"/>
+}
+else
+{
+    @foreach(var topic in TopicDtos)
+    {
+        var link = "/TopicsByTopic/" + topic.Id;
+        
+        <div class = "nav-item px-3">
+            <NavLink class="nav-link" href="@link">
+                <!--<span class="oi oi-headphones"></span>--><img src="@topic.Avatar_Src" width="25px" class="img-thumbnail">&nbsp;@topic.FullName
+            </NavLink>
+        </div>
+    }
+}

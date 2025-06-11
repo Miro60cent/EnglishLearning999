@@ -1,0 +1,30 @@
+﻿@inherits DisplayResourcesBase
+
+<!--Вывод товаров для главного списка-->
+@foreach(var resource in Resources)
+{
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-2">
+        <a href="/ResourceDetails/@resource.Id">
+            <div class="card">
+                <img class="img-thumbnail" src="@resource.Image_Src">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">
+                        @resource.Model_Name
+                    </h5>
+                    <p class="card-text text-black h4">
+                        <b>@resource.Price.ToString("C2", new System.Globalization.CultureInfo("uk-UA"))</b>
+                    </p>
+
+                    @if (@resource.In_Stock)
+                    {
+                        <b class="card-text text-success">Есть в наличии</b>
+                    }
+                    else
+                    {
+                        <b class="card-text text-danger">Нет в наличии</b>
+                    }
+                </div>
+            </div>
+        </a>
+    </div>               
+}

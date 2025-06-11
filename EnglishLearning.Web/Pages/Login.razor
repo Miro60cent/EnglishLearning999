@@ -1,0 +1,20 @@
+﻿@page "/login"
+@inherits LoginBase
+
+<!--Авторизация-->
+<div class="row">
+    <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+        <h1>Вход на сайт</h1>
+        <EditForm Model="@LoginData" OnValidSubmit="LoginAsync">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+            <label for="login" class="form-label">Логин:</label>
+            <input type="login" name="loginInput" class="form-control mt-2" id="login" @bind=@LoginData.UserName required>
+            <label for="password" class="form-label">Пароль:</label>
+            <input type="password" name="passwordInput" class="form-control mt-2" id="ppassword" @bind=@LoginData.Password required>
+            <button type="submit" class="btn btn-primary my-3">Войти</button>
+            &nbsp;&nbsp;<a href="/login" class="">Я забыл пароль</a>
+            &nbsp;&nbsp;<a href="/login" class="">Зарегистрироваться</a>
+        </EditForm>
+    </div>
+</div>

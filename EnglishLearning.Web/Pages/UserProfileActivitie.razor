@@ -1,0 +1,55 @@
+﻿@page "/UserProfileActivitie"
+@inherits UserProfileActivitieBase
+
+<!--Корзина-->
+@if (UserProfileActivitieItems == null && ErrorMessage == null)
+{
+    <DisplaySpinner></DisplaySpinner>
+}
+else if (ErrorMessage != null)
+{
+    <DisplayError ErrorMessage ="@ErrorMessage"></DisplayError>
+}
+else
+{
+    <h1 class="mb-5">Корзина</h1>
+    @if(UserProfileActivitieItems.Count() > 0)
+    {
+        <div class = "row mb-5">
+            <div class ="col-xxl-6">
+                @foreach(var item in UserProfileActivitieItems)
+                {
+                    <div class="row mb-4">
+                        <div class ="col-12 col-sm-4">
+                            <img src="@item.Image_Src" width="190" class="img-thumbnail">
+                        </div>
+                        <div class ="col-12 col-sm-8">
+                            <h3>@item.Topic_Name @item.Model_Name</h3>
+                            <h4 class="mb-4 text-secondary">@item.Color</h4>
+                            <h2 class="mb-2"><b>@item.Price.ToString("C2", new System.Globalization.CultureInfo("uk-UA"))</b></h2>
+                            <div class="form-group">
+                                <button class="btn btn-outline-secondary btn-sm" @onclick ="()=>UpdateQuantityUserProfileActivitie_Item_Click(item.Id, --item.Quantity)"><i class="oi oi-minus"></i></button>
+                                <input type="number" style="width:80px;" @bind="@item.Quantity" @onclick ="()=>UpdateQuantityUserProfileActivitie_Item_Click(item.Id, item.Quantity)"/>
+                                <button class="btn btn-outline-secondary btn-sm" @onclick ="()=>UpdateQuantityUserProfileActivitie_Item_Click(item.Id, ++item.Quantity)"><i class="oi oi-plus"></i></button>
+                                <button class="btn btn-danger btn-sm" @onclick ="(() => DeleteUserProfileActivitie_Item_Click(item.Id))"><i class="fa fa-trash"></i>&nbsp;Удалить из корзины</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-xxl-6">
+                <h3>Заказ</h3>
+                <div class="mt-2">
+                    <h3>Общая стоимость @TotalQuantity наименований:&nbsp;<b class="text-danger">@TotalPrice</b></h3>
+                    <a href="Checkout" class="btn btn-success">
+                        <span class="oi oi-credit-card"></span>&nbsp; Перейти к оформлению заказа
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h2>В данный момент в вашей корзине нет товаров</h2>
+    }
+}

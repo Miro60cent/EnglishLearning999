@@ -1,0 +1,22 @@
+﻿@page "/ResourcesByTopic/{TopicId:int}"
+@inherits ResourcesByTopicBase
+
+<!--Вывод товаров по конкретному производителю-->
+@if(Resources == null && ErrorMessage == null)
+{
+    <DisplaySpinner/>
+}
+else if(ErrorMessage != null)
+{
+    <DisplayError ErrorMessage = "@ErrorMessage"/>
+}
+else
+{
+    <h1>Наушники @TopicName</h1>
+    @if(Resources.Count() > 0)
+    {
+        <div class = "row mt-3">
+          <DisplayResources Resources = "@Resources"></DisplayResources>
+        </div>
+    }
+}

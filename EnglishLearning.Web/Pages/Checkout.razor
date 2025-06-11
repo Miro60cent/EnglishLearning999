@@ -1,0 +1,54 @@
+﻿@page "/Checkout"
+@inherits CheckoutBase
+
+<!--Оплата-->
+<h1 class="mb-5">Оплата</h1>
+<div class="row">
+    <div class="col-md-6" style="display:@DisplayButtons" >
+        <h3 class="mb-2">Метод оплаты</h3>
+        <div id="smart-button-container">
+            <input type="hidden" name="descriptionInput" id="description" @bind="PaymentDescription" />
+            <input name="amountInput" type="hidden" id="amount" @bind="PaymentAmount">
+            <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
+        </div>
+    </div>
+
+    @if (ResourceProfile_Items == null)
+    {
+        <DisplaySpinner/>
+    }
+    else
+    {
+        <div class="col-md-6">
+            <h3 class="mb-2">Покупки</h3>
+            @if (ResourceProfile_Items.Count() > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Наушники</th>
+                            <th>Цена</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in ResourceProfile_Items)
+                        {
+                            <tr>
+                                <td>@item.Quantity x @item.UserProfileActivities_Name @item.Model_Name</td>
+                                <td>@item.TotalPrice.ToString("C2", new System.Globalization.CultureInfo("uk-UA"))</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td><b>Всего</b></td>
+                            <td><b>@PaymentAmount.ToString("C2", new System.Globalization.CultureInfo("uk-UA"))</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>В данный момент в вашей корзине нет товаров</p>
+            }
+        </div>
+    }
+</div>

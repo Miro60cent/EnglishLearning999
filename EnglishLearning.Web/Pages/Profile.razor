@@ -1,0 +1,65 @@
+﻿@page "/Profile"
+@inherits ProfileBase
+
+<!--Профиль-->
+@if (User == null && ErrorMessage == null)
+{
+    <DisplaySpinner/>
+}
+else if (ErrorMessage != null)
+{
+    <DisplayError ErrorMessage="@ErrorMessage"></DisplayError>
+}
+else
+{
+    <h1>Профиль</h1>
+    <div class = "row mb-5">
+        <div class ="col-md-4">
+            <img class="img-fluid" width="400" src="@User.Avatar_Src">
+        </div>
+        <div class ="col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+            <div class="row g-3">
+                <div class="col-12">
+                    <label for="FullName" class="form-label">Полное имя:</label>
+                    <input type="text" name="fullNameInput" class="form-control" id="fullName" @bind=@User.FullName required>
+                </div>
+                <div class="col-12">
+                    <label for="Telephone" class="form-label">Номер телефона:</label>
+                    <input type="text" name="telephoneInput" class="form-control" id="telephone" @bind=@User.Telephone required>
+                </div>
+                <div class="col-12">
+                    <h5>E-mail: <b>@User.Email</b></h5>
+                    <h5>Скидка: <b>@User.Discount_Percent %</b></h5>
+                    @if (User.Is_Admin)
+                    {
+                        <h5><b class="text-danger">Администратор</b></h5>
+                    }
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#changePassword" aria-expanded="false" aria-controls="changePassword">
+                        Изменить пароль:
+                    </button>
+                    <div class="collapse" id="changePassword">
+                        <div class="card card-body">
+                            <div class="col-12">
+                                <label for="NewPassword1" class="form-label">Новый пароль</label>
+                                <input type="password" name="password1Input" class="form-control" id="newPassword1" @bind=@NewPassword1 required>
+                            </div>
+                            <div class="col-12">
+                                <label for="NewPassword2" class="form-label">Подтвердите новый пароль:</label>
+                                <input type="password" name="password2Input" class="form-control" id="newPassword2" @bind=@NewPassword2 required>
+                            </div>
+                            <div class="col-12">
+                                <label for="OldPassword" class="form-label">Для смены пароля введите старый пароль:</label>
+                                <input type="password" name="oldPasswordInput" class="form-control" id="oldPassword" @bind=@OldPassword required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" @onclick ="() => (UpdateUser_Click())">Обновить</button>
+                <button class="btn btn-primary" @onclick ="() => (UpdateAvatar_Click())">Обновить аватарку</button>
+                <div>@Message</div>
+            </div>
+        </div>
+    </div>
+}

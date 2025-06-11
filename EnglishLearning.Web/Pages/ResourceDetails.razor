@@ -1,0 +1,85 @@
+﻿@page "/ResourceDetails/{Id:int}"
+@inherits ResourceDetailsBase
+
+<!--Страничка конкретного товара с описанием-->
+@if (Resource == null && ErrorMessage == null)
+{
+    <DisplaySpinner/>
+}
+else if (ErrorMessage != null)
+{
+    <DisplayError ErrorMessage="@ErrorMessage"></DisplayError>
+}
+else
+{
+    <h1 class="mb-5">Информация про наушники</h1>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <img class="img-fluid" src="@Resource.Image_Src">       
+        </div>
+        <div class="col-md-6">
+            <h3 class="text-primary">@Resource.Topic_Name @Resource.Model_Name</h3>
+            <p class="mb-4">
+                <b>
+                    <p class="text-black h1">@Resource.Price.ToString("C2", new System.Globalization.CultureInfo("uk-UA"))&nbsp;</p>
+                    @if (@Resource.In_Stock)
+                    {
+                        <div class="text-success">Есть в наличии</div>
+                    }
+                    else 
+                    {
+                        <div class="text-danger">Нет в наличии</div>
+                    }
+                </b>
+            </p>
+            <table bUserProfileActivitie="0" style="color:#404040; font-size: 75%;">
+                <tr>
+                    <th width="200">Производитель</th><th width="250">@Resource.Topic_Name</th>
+                </tr>
+                <tr>
+                    <th>Цвет</th><th>@Resource.Color</th>
+                </tr>
+                <tr>
+                    <th>Форм-фактор</th><th>@Resource.Form_factor</th>
+                </tr>
+                <tr>
+                    <th class="sss">Беспроводные</th><th>@(@Resource.Wireless ? "Да" : "Нет")</th>
+                </tr>
+                <tr>
+                    <th>Шумоподавление</th><th>@(@Resource.Noice_Cancellation ? "Есть" : "Нет") </th>
+                </tr>
+                <tr>
+                    <th>Водонепроницаемые</th><th>@(@Resource.Waterproof ? "Да" : "Нет")</th>
+                </tr>
+                <tr>
+                    <th>Микрофон</th><th>@(@Resource.Microphone ? "Есть" : "Нет")</th>
+                </tr>
+            </table>
+            <br>
+            <div>
+                @if (@Resource.In_Stock)
+                {
+                    <AuthorizeView>
+                        <Authorized>
+                            <button class="btn btn-success"
+                            @onclick ="() => (AddToUserProfileActivitie_Click(new Models.Dtos.UserProfileActivitie_ItemToAddDto{
+                                UserProfileActivitieId = HardCoded.UserProfileActivitieId,
+                                ResourceId = Resource.Id,
+                                Quantity = 1
+                            }))"
+                            ><b>Добавить в корзину</b></button>
+                        </Authorized>
+                        <NotAuthorized>
+                            <a href="/login" class="btn btn-success">Добавить в корзину</a>
+
+                        </NotAuthorized>
+                    </AuthorizeView>
+                }
+                else
+                {
+                    <button class="btn btn-secondary disabled"><b>Добавить в корзину</b></button>
+                }
+            </div>
+        </div>
+    </div>
+}

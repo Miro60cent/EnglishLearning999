@@ -1,0 +1,134 @@
+﻿@page "/ResourceProfileCustomization"
+@inherits ResourceProfileCustomizationBase
+
+<!--Настройка-->
+@if (Resource == null && Resource == null && ErrorMessage == null)
+{
+    <DisplaySpinner/>
+}
+else if (ErrorMessage != null)
+{
+    <DisplayError ErrorMessage="@ErrorMessage"></DisplayError>
+}
+else
+{
+    <h1>Настройка</h1>
+    <div class = "row mb-5">
+        <div class ="col-12">
+            <form class="row">
+                <div class="col-sm-3">
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <img class="img-fluid my-1" src="@Resource.Avatar_Src">
+                            <button class="btn btn-primary btn-sm col-12">Обновить аватарку</button>
+                        </div>
+                        <div class="col-6">
+                            <img class="img-fluid my-1" src="@Resource.Image_Src">
+                            <button class="btn btn-primary btn-sm col-12">Обновить аватарку</button>
+                        </div>
+                    </div>
+                    <div class="input-group mt-3">
+                      <input type="text" class="form-control col-6" placeholder="Название производителя" aria-label="Название производителя" aria-describedby="NewResource_Name">
+                      <button class="btn btn-primary btn-sm col-6" type="button" id="NewResource_Name">Создать нового производителя</button>
+                    </div>
+                    <button class="btn btn-primary btn-sm col-12 mt-2">Создать новые наушники</button>
+                    <button class="btn btn-primary btn-sm col-12 mt-2">Сохранить</button>
+                </div>
+                <div class="col-sm-3 align-self-baseline">
+                    <label for="Noice_Cancellation" class="form-label mt-3">Производитель:</label>
+                    <select class="form-select" aria-label="Noice_Cancellation" id="Microphone">
+                      <option value="1">HyperX</option>
+                      <option value="2">Logitech</option>
+                      <option value="3">Hator</option>
+                      <option value="4">Razer</option>
+                      <option value="5">Adidas</option>
+                      <option value="6">Mairdi</option>
+                      <option value="7">Panasonic</option>
+                      <option value="8">Sennheiser</option>
+                    </select>
+
+                    <label for="Form_factor" class="form-label mt-4">Форм-фактор:</label>
+                    <input type="text" name="form_factorInput" class="form-control" id="Form_factor" @bind=@Resource.Form_factor required>
+
+                    <label for="Noice_Cancellation" class="form-label mt-4">Шумоподавление:</label>
+                    <select class="form-select" aria-label="Noice_Cancellation" id="Microphone">
+                      <option value="1">Есть</option>
+                      <option value="2">Нет</option>
+                    </select>
+                    <label for="In_Stock" class="form-label mt-4">На складе:</label>
+                    <select class="form-select" aria-label="In_Stock" id="In_Stock">
+                      <option value="1">Да</option>
+                      <option value="2">Нет</option>
+                    </select>
+                </div>
+                <div class="col-sm-3 align-self-baseline">
+                    <label for="FullName" class="form-label mt-3">Наушники:</label>
+                    <input type="text" name="fullNameInput" class="form-control" id="fullName" @bind=@Resource.Model_Name required>
+                    <label for="Price" class="form-label mt-4">Цена:</label>
+                    <input type="text" name="priceInput" class="form-control" id="Price" @bind=@Resource.Price required>
+                    <label for="Waterproof" class="form-label mt-4">Ведонепроницаемость:</label>
+                    <select class="form-select" aria-label="Waterproof" id="Microphone">
+                      <option value="1">Есть</option>
+                      <option value="2">Нет</option>
+                    </select>
+                    <div>@Message</div>
+                </div>
+                <div class="col-sm-3 align-self-baseline">
+                    <label for="Color" class="form-label mt-3">Цвет:</label>
+                    <input type="text" name="colorInput" class="form-control" id="Color" @bind=@Resource.Color required>
+                    <label for="Wireless" class="form-label mt-4">Беспроводные:</label>
+                    <select class="form-select" aria-label="Wireless" id="Microphone">
+                      <option value="1">Да</option>
+                      <option value="2">Нет</option>
+                    </select>
+                    <label for="Microphone" class="form-label mt-4">Микрофон:</label>
+                    <select class="form-select" aria-label="Microphone" id="Microphone">
+                      <option value="1">Есть</option>
+                      <option value="2">Нет</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class ="col-12">
+            <div class="table-responsive-md">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Производитель</th>
+                            <th scope="col">Наушники</th>
+                            <th scope="col">Цвет</th>
+                            <th scope="col">Цена</th>
+                            <th scope="col">Форм-фактор</th>
+                            <th scope="col">Беспроводные</th>
+                            <th scope="col">Шумоподавление</th>
+                            <th scope="col">Ведонепроницаемость</th>
+                            <th scope="col">Микрофон</th>
+                            <th scope="col">На складе</th>
+                            <th scope="col">Изображение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var Resource in Resources)
+                        {
+                            <tr>
+                                <th scope="row">@Resource.Id</th>
+                                <td>@Resource.Resource_Name</td>
+                                <td>@Resource.Model_Name</td>
+                                <td>@Resource.Color</td>
+                                <td>@Resource.Price</td>
+                                <td>@Resource.Form_factor</td>
+                                <td>@(Resource.Wireless ? "Да" : "Нет")</td>
+                                <td>@(Resource.Noice_Cancellation ? "Есть" : "Нет")</td>
+                                <td>@(Resource.Waterproof ? "Есть" : "Нет")</td>
+                                <td>@(Resource.Microphone ? "Есть" : "Нет")</td>
+                                <td>@(Resource.In_Stock ? "Есть" : "Нет")</td>
+                                <td>@Resource.Image_Src</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
